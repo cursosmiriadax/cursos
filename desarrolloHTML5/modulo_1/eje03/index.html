@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf8"/>
+		<title>Herencia</title>
+		<style>
+			#caja h1 {color red;} /*A=0 B=1 C=0 D=1*/
+			#caja header h1 {color: yellow;} /*A=0 B=1 C=0 D=2/*
+			#caja .cabecera h1 {color: blue;} /*A=0 B=1 C=1 D=1*/
+			header h1 {color: purple;} /*A=0 B=0 C=0 D=2*/
+		</style>
+	</head>
+	<body>
+		<div id="caja">
+			<header class="cabecera">
+				<h1 style="color: green;">Cabecera: header</h1><!-- A=1 B=0 C=0 D=0 -->
+			</header>
+		</div>
+	</body>
+</html>

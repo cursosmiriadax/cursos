@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Date</title>
+		<meta charset="UTF-8">
+		<style>
+			body { background: #cca3a9;}
+			table { border-collapse: collapse;}
+			tbody tr:nth-child(2n+1) {background: #bd7981;}
+		</style>
+	</head>
+	<body>
+		<h1 id="h1"></h1>
+		<h2>Santiago Suárez Díaz</h2>
+		<h2 id="h2">La fecha y la hora son:</h2>
+		<div id="fecha"></div>
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th scope="col">valores a examinar</th>
+						<th scope="col">resultado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">innerHTML del elemento id="h2"</th>
+						<td id="inner_h2"></td>
+					</tr>
+					<tr>
+						<th scope="row">outerHTML del elemento id="h1"</th>
+						<td id="outer_h1"></td>
+					</tr>
+					<tr>
+						<th scope="row">location.ref</th>
+						<td id="location_ref"></td>
+					</tr>
+					<tr>
+						<th scope="row">location</th>
+						<td id="location"></td>
+					</tr>
+					<tr>
+						<th scope="row">screen.width</th>
+						<td id="screen_width"></td>
+					</tr>
+					<tr>
+						<th scope="row">screen.heigth</th>
+						<td id="screen_height"></td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+		<script type="text/javascript">
+			var fecha = new Date();
+			var msj;
+
+			if (fecha.getHours() < 7)
+				{ msj = "Buenas noches";}
+			else if (fecha.getHours() < 12)
+				{ msj = "Buenos días";}
+			else if (fecha.getHours() < 21)
+				{ msj = "Buenas tardes";}
+			else
+				{ msj = "Buenas noches";}
+
+			document.getElementById("h1").innerHTML    = msj;
+			document.getElementById("fecha").innerHTML = fecha;
+
+			document.getElementById("inner_h2").innerHTML = document.getElementById("h2").innerHTML;
+			document.getElementById("outer_h1").innerText = document.getElementById("h1").outerHTML;
+			document.getElementById("location_ref").innerHTML = location.ref;
+			document.getElementById("location").innerHTML = location;
+			document.getElementById("screen_width").innerHTML = window.screen.width;
+			document.getElementById("screen_height").innerHTML = window.screen.height;
+		</script>
+	</body>
+</html>

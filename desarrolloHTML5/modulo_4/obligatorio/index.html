@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Buenos días, bienvenido a la calculadora de Santiago Suárez Díaz</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/estilo.css" />
+		<script type="text/javascript">
+			var num, acc = 0, op = "";
+
+			function mas() { 
+				acc = num.value;
+				op = function(op1, op2) { return op1 + op2;};
+			}
+			function menos() {
+				acc = num.value;
+				op = function(op1, op2) { return op1 - op2;};
+			}
+			function multiplica() {
+				acc = num.value;
+				op = function(op1, op2) {return op1 * op2;};
+			}
+			function divide() {
+				acc = num.value;
+				op = function(op1, op2) {return op1 / op2;};
+			}
+			function exponente() {
+				acc = num.value;
+				op = function(op1, op2) {return Math.pow(op1, op2);};
+			}
+
+			function cuadrado() {num.value = +num.value * +num.value;}
+
+			function inversa() {num.value = 1 / +num.value;}
+
+			function raizcuadrada() {num.value = Math.sqrt(+num.value);}
+
+			function parte_entera() {
+				if(+num.value >= 0)
+					num.value = Math.floor(+num.value);
+				else
+					num.value = Math.ceil(+num.value);
+			}
+
+			function calcular() {
+				num.value = op(+acc, +num.value);
+			}
+
+			function inic() {num = document.getElementById("num");}
+
+			function vaciar() {num.value = "";}
+		</script>
+	</head>
+	<body onLoad="inic()">
+		<table id="calculadora">
+			<tr>
+				<td colspan="4"><input class="pantalla" id="num" onClick="vaciar()" type="text" /></td>
+			</tr>
+			<tr>
+				<td><button class="operadorbinario botonoperacion" onClick="mas()">+</button></td>
+				<td><button class="operadorbinario botonoperacion" onClick="menos()">-</button></td>
+				<td><button class="operadorbinario botonoperacion" onClick="multiplica()">*</button></td>
+				<td rowspan="4"><button class="botonresultado" onClick="calcular()">=</button></td>
+			</tr>
+			<tr>
+				<td><button class="operadorbinario botonoperacion" onClick="divide()">/</button></td>
+				<td><button class="operadorbinario botonoperacion" onClick="exponente()">x<sup>y</sup></button></td>
+				<td><button class="operadorunitario botonoperacion" onClick="cuadrado()">x<sup>2</sup></button></td>
+			</tr>
+			<tr>
+				<td><button class="operadorunitario botonoperacion" onClick="inversa()">1/x</button></td>
+				<td><button class="operadorunitario botonoperacion" onClick="raizcuadrada()">sqrt</button></td>
+				<td><button class="operadorunitario botonoperacion" onClick="parte_entera()">entera</button></td>
+			</tr>
+		</table>
+	</body>
+</html>

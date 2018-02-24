@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Buenos días, bienvenido a la calculadora de Santiago Suárez Díaz</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/estilo.css" />
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="js/script.js"></script>
+	</head>
+	<body>
+		<table id="calculadora">
+			<tr>
+				<td colspan="4"><input class="pantalla" id="num" type="text" /></td>
+			</tr>
+			<tr>
+				<td><button class="operadorbinario botonoperacion rtl" id="mas">+</button></td>
+				<td><button class="operadorbinario botonoperacion" id="menos">-</button></td>
+				<td><button class="operadorbinario botonoperacion rtr rbr" id="multiplica">*</button></td>
+				<td rowspan="3"><button class="botonresultado" id="calcular">=</button></td>
+			</tr>
+			<tr>
+				<td><button class="operadorbinario botonoperacion rbl" id="divide">/</button></td>
+				<td><button class="operadorbinario botonoperacion rbr" id="exponente">x<sup>y</sup></button></td>
+				<td><button class="operadorunitario botonoperacion rtl rtr" id="cuadrado">x<sup>2</sup></button></td>
+			</tr>
+			<tr>
+				<td><button class="operadorunitario botonoperacion rtl" id="inversa">1/x</button></td>
+				<td><button class="operadorunitario botonoperacion" id="raizcuadrada">sqrt</button></td>
+				<td><button class="operadorunitario botonoperacion rbr" id="parte_entera">entera</button></td>
+			</tr>
+			<tr>
+				<td><button class="operadorunitario botonoperacion rbl" id="potencia2">2<sup>n</sup></button></td>
+				<td><button class="operadorunitario botonoperacion rbr" id="factorial">x!</button></td>
+				<td><button class="operadorCSV botonoperacion rtl rbl" id="sumatorio">Σ</button></td>
+				<td><button class="operadorCSV botonoperacion rtr rbr" id="productorio">Π</button></td>
+			</tr>
+
+		</table>
+	</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<title>Módulo 6 ejercicio obligatorio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+		<link rel="stylesheet" type="text/css" href="css/estilo.css" />
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="js/script.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<nav class="navbar navbar-inverse ">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#miMenu">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span> 
+						</button>
+						<a class="navbar-brand" href="index.html">MOOC</a>
+					</div>
+					<div class="collapse navbar-collapse" id="miMenu">
+						<ul class="nav navbar-nav">
+							<li><a href="index.html">INICIO</a></li>
+							<li><a href="ejercicio_puzzle.html">PUZZLE</a></li>
+							<li class="active"><a href="calculadora.html">CALCULADORA</a></li> 
+							<li><a href="#">Opción 4</a></li> 
+							<li><a href="#">Opción 5</a></li> 
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+
+				<table id="calculadora">
+					<tr>
+						<td colspan="4"><div class="pantalla" id="num" contenteditable="true"></div></td>
+					</tr>
+					<tr>
+						<td colspan="2"><div class="operadorMemoria rtl rbl" id="memoria"></div></td>
+						<td><button class="operadorToM botonoperacion" id="buttonToM">ToM</button></td>
+						<td><button class="operadorFromM botonoperacion rtr rbr" id="buttonFromM">FromM</button></td>
+					</tr>
+					<tr>
+						<td><button class="operadorbinario botonoperacion rtl" id="mas">+</button></td>
+						<td><button class="operadorbinario botonoperacion" id="menos">-</button></td>
+						<td><button class="operadorbinario botonoperacion rtr rbr" id="multiplica">*</button></td>
+						<td rowspan="3"><button class="botonresultado" id="calcular">=</button></td>
+					</tr>
+					<tr>
+						<td><button class="operadorbinario botonoperacion rbl" id="divide">/</button></td>
+						<td><button class="operadorbinario botonoperacion rbr" id="exponente">x<sup>y</sup></button></td>
+						<td><button class="operadorunitario botonoperacion rtl rtr" id="cuadrado">x<sup>2</sup></button></td>
+					</tr>
+					<tr>
+						<td><button class="operadorunitario botonoperacion rtl" id="inversa">1/x</button></td>
+						<td><button class="operadorunitario botonoperacion" id="raizcuadrada">sqrt</button></td>
+						<td><button class="operadorunitario botonoperacion rbr" id="parte_entera">entera</button></td>
+					</tr>
+					<tr>
+						<td><button class="operadorunitario botonoperacion rbl" id="potencia2">2<sup>n</sup></button></td>
+						<td><button class="operadorunitario botonoperacion rbr" id="factorial">x!</button></td>
+						<td><button class="operadorCSV botonoperacion rtl rbl" id="sumatorio">Σ</button></td>
+						<td><button class="operadorCSV botonoperacion rtr rbr" id="productorio">Π</button></td>
+					</tr>
+				</table>
+
+			<div class="panel-footer">Santiago Suárez Díaz</div>
+		</div>
+	</body>
+</html>

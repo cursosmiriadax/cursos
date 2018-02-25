@@ -1,0 +1,81 @@
+@font-face {
+	font-family: "mi calculadora";
+	src: url(DS-DIGI.TTF);
+}
+
+#calculadora{
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom:2rem;
+	border-spacing: 4px 2px;
+	border-collapse: separate;
+}
+
+.pantalla{
+	font-family: "mi calculadora";
+	font-size: 6rem;
+	background: #a0a0a0;
+	color: white;
+	width: 254px;
+	height: 90px;
+	border: none;
+	border-radius: 5px;
+}
+
+.operadorMemoria{
+	background: #5b5b5b;
+	font-family: "mi calculadora";
+	font-size: 4.5rem;
+	width: 100%;
+	height: 60px;
+	color: white;
+}
+
+.operadorToM, .operadorFromM {
+	background: #383838;
+}
+
+.operadorbinario{
+	background: #1e90ff;
+}
+
+.operadorunitario{
+	background: #00bfff;
+}
+
+.operadorCSV{
+	background: #0260b8;
+}
+
+.botonoperacion{
+	width: 60px;
+	height: 60px;
+	border: none;
+	color: white;
+	font-size: 1.5rem;
+}
+
+.botonresultado{
+	width: 60px;
+	height: 190px;
+	background: orange;
+	border: none;
+	color: white;
+	font-size: 1.5rem;
+	border-radius: 5px;
+}
+
+.rtl{
+	border-top-left-radius: 5px;
+}
+
+.rtr{
+	border-top-right-radius: 5px;
+}
+.rbl{
+	border-bottom-left-radius: 5px;
+}
+
+.rbr{
+	border-bottom-right-radius: 5px;
+}

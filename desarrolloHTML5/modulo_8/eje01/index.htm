@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Módulo 8 ejercicio opcional</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+		<link rel="stylesheet" href="css/estilo.css" type="text/css" />
+		<script type="text/javascript" src="js/zepto.js"> </script>
+		<script type="text/javascript" src="js/event.js"> </script>
+		<script type="text/javascript" src="js/touch.js"> </script>
+		<script type="text/javascript">
+			$(function(){ 
+				var t, cl = $("#crono");
+
+				function mostrar()  { cl.html((+cl.html() + 0.1).toFixed(1)); };
+				function arrancar() { t=setInterval(mostrar, 100);};
+				function parar()    { clearInterval(t);  t=undefined; };
+				function cambiar()  { if (!t) arrancar(); else parar(); };
+
+				$("#cambiar").on('click', function(){cambiar();});
+				$("#inicializar").on('click', function(){cl.html("0.0");});
+
+				// Detiene los eventos tap cuando pulsamos sobre algún botón
+				$("#cambiar").on("tap", function(e){e.stopPropagation();});
+				$("#inicializar").on("tap", function(e){e.stopPropagation();});
+
+				// 
+				$("body").on("swipe", function(e){cl.html("0.0");});
+				$("body").on("tap", function(e){cambiar();});
+			});
+		</script>
+	</head>
+	<body>
+		<h2 id="pr">Cronómetro</h2>
+		<h2><span id="crono"> 0.0 </span> segundos </h2>
+
+		<button type="button" id="cambiar"> arrancar/parar </button>
+		<button type="button" id="inicializar">  inicializar </button>
+	</body>
+</html>

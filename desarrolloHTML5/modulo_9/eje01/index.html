@@ -1,105 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>GMaps.js &mdash; Geolocation</title>
-  <script type="text/javascript" src="js/zepto.min.js"></script>
-  <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBfT1hZuPxSr4ToNhlw9pS9FQdQHB0sZQ8"></script>
-  <script type="text/javascript" src="js/gmaps.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/mypath.css" />
-  <script type="text/javascript">
-    var map, coordenadas=[];
+	<head>
+		<meta charset="utf-8" />
+		<title>Módulo 9 ejercicio opcional</title>
+		<script type="text/javascript" src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBfT1hZuPxSr4ToNhlw9pS9FQdQHB0sZQ8"></script>
+		<script type="text/javascript" src="js/gmaps.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/mypath.css" />
+		<script type="text/javascript">
+			var map, coordenadas=[];
 
-    $(function(){
-      function guardaRutas(){
-        localStorage.coordenadas = JSON.stringify(coordenadas);
-      };
+			$(function(){
+				function guardaRutas(){
+					localStorage.coordenadas = JSON.stringify(coordenadas);
+				};
 
-      function cargaRutas(pos) {
-        if(undefined === localStorage.coordenadas)
-          coordenadas = [{ lat: pos.coords.latitude, lng: pos.coords.longitude}];
-        else
-          coordenadas = JSON.parse(localStorage.coordenadas);
-      };
+				function cargaRutas(pos) {
+					if(undefined === localStorage.coordenadas)
+						coordenadas = [{ lat: pos.coords.latitude, lng: pos.coords.longitude}];
+					else
+						coordenadas = JSON.parse(localStorage.coordenadas);
+				};
 
-      function dibujaRuta(p1, p2) {
-        map.drawRoute({
-          origin: [p1.lat, p1.lng],  // origen en coordenadas anteriores
-          // destino en coordenadas del click o toque actual
-          destination: [p2.lat, p2.lng],
-          travelMode: 'driving',
-          strokeColor: '#000000',
-          strokeOpacity: 0.6,
-          strokeWeight: 5
-        });
+				function dibujaRuta(p1, p2) {
+					map.drawRoute({
+						origin: [p1.lat, p1.lng],  // origen en coordenadas anteriores
+						// destino en coordenadas del click o toque actual
+						destination: [p2.lat, p2.lng],
+						travelMode: 'driving',
+						strokeColor: '#000000',
+						strokeOpacity: 0.6,
+						strokeWeight: 5
+					});
+					insertaMarcador({ lat: p2.lat, lng: p2.lng});  // pone marcador en mapa
+				};
 
-        insertaMarcador({ lat: p2.lat, lng: p2.lng});  // pone marcador en mapa
-      };
+				function insertaMarcador(pos){
+					map.addMarker(pos);
+				}
 
-      function insertaMarcador(pos){
-        map.addMarker(pos);
-      }
+				function enlazarMarcador(e){
+					coordenadas.push({
+						lat: e.latLng.lat(),
+						lng: e.latLng.lng()
+					});
 
-      function enlazarMarcador(e){
-        coordenadas.push({
-          lat: e.latLng.lat(),
-          lng: e.latLng.lng()
-        });
+					guardaRutas();
 
-        guardaRutas();
+					var i = coordenadas.length - 1;
+					dibujaRuta(coordenadas[i-1], coordenadas[i]);
+				};
 
-        var i = coordenadas.length - 1;
-        dibujaRuta(coordenadas[i-1], coordenadas[i]);
-      };
+				function geolocalizar(){
+					GMaps.geolocate({
+						success: function(position){
+							cargaRutas(position);
 
-      function geolocalizar(){
-        GMaps.geolocate({
-          success: function(position){
-            cargaRutas(position);
+							map = new GMaps({  // muestra mapa centrado en coords [lat, lng]
+								el: '#map',
+								lat: coordenadas[0].lat,
+								lng: coordenadas[0].lng,
+								click: enlazarMarcador,
+								tap: enlazarMarcador
+							});
 
-            //coordenadas = [{ lat: position.coords.latitude, lng: position.coords.longitude}] ;
+							insertaMarcador({ lat: coordenadas[0].lat, lng: coordenadas[0].lng});  // marcador en [lat, lng]
 
-            map = new GMaps({  // muestra mapa centrado en coords [lat, lng]
-              el: '#map',
-              lat: coordenadas[0].lat,
-              lng: coordenadas[0].lng,
-              click: enlazarMarcador,
-              tap: enlazarMarcador
-            });
-            insertaMarcador({ lat: coordenadas[0].lat, lng: coordenadas[0].lng});  // marcador en [lat, lng]
+							for(var i = 1; i < coordenadas.length; i++)
+								dibujaRuta(coordenadas[i-1], coordenadas[i]);
+						},
+						error: function(error) { alert('Geolocalización falla: '+error.message); },
+						not_supported: function(){ alert("Su navegador no soporta geolocalización"); },
+					});
+				};
 
-            for(var i = 1; i < coordenadas.length; i++)
-              dibujaRuta(coordenadas[i-1], coordenadas[i]);
-          },
-          error: function(error) { alert('Geolocalización falla: '+error.message); },
-          not_supported: function(){ alert("Su navegador no soporta geolocalización"); },
-        });
-      };
+				$("#inicializar").on("click", function(){
+					map.removeMarkers();
+					map.cleanRoute();
+					navigator.geolocation.getCurrentPosition(
+						function(pos){
+							coordenadas = [{
+								lat: pos.coords.latitude,
+								lng: pos.coords.longitude
+							}];
 
-      $("#inicializar").on("click", function(){
-        navigator.geolocation.getCurrentPosition(
-          function(pos){
-            map.removeMarkers();
-            map.cleanRoute();
-            coordenadas = [{
-              lat: pos.coords.latitude,
-              lng: pos.coords.longitude
-            }];
-            guardaRutas();
-            insertaMarcador({ lat: coordenadas[0].lat, lng: coordenadas[0].lng});
-          },
-          function(e){alert("Ha ocurrido un error al tratar de definir la localización actual.");})
-      });
+							guardaRutas();
+							insertaMarcador({ lat: coordenadas[0].lat, lng: coordenadas[0].lng});
+						},
+						function(e){alert("Ha ocurrido un error al tratar de definir la localización actual.");})
+				});
 
-      geolocalizar();
-    });
-  </script>
-</head>
-<body>
-  <div id="cabecera">
-    <h1>Geolocalización</h1>
-    <button id="inicializar">Inicialiar</button>
-  </div>
-  <div id="map"></div>
-</body>
+				geolocalizar();
+			});
+		</script>
+	</head>
+	<body>
+		<div id="cabecera">
+			<h1>Geolocalización</h1>
+			<button id="inicializar">Inicialiar</button>
+		</div>
+		<div id="map"></div>
+	</body>
 </html>
